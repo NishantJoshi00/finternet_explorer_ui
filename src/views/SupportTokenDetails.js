@@ -12,7 +12,7 @@ const SupportTokenDetails = ({ data }) => {
   return (
     <Card className="shadow">
       <CardHeader>
-        <h3 className="mb-0">Driver Details</h3>
+        <h3 className="mb-0">Token Driver Details</h3>
         {/* {!isUploadVisible && <button onClick={addClickHandler} style={{ position: 'absolute', right: '18px', top: '18px', border: 'none', borderRadius: '10px', background: '#5e72e4', color: '#fff', padding: '6px 12px' }}>Add</button>} */}
       </CardHeader>
       <CardBody>

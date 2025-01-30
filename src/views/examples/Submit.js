@@ -75,7 +75,7 @@ const Submit = () => {
                         </FormGroup>
 
                         <FormGroup>
-                            <Label for="driverBinary">Token Handler Binary</Label>
+                            <Label for="driverBinary">Program Binary</Label>
                             <FileUpload fileName={driverBinary?.name} onUpload={(e) => setDriverBinary(e.target.files?.[0] || null)} fileType={'WASM'} />
                         </FormGroup>
 

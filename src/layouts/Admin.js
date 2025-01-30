@@ -23,6 +23,7 @@ import Home from "views/examples/Home.js";
 import routes from "routes.js";
 import MyBreadcrumb from "views/examples/BreadCrumb";
 import BindForm from "views/examples/BindForm";
+import AddUserForm from "views/examples/AddUserForm";
 import Submit from "views/examples/Submit";
 import Execute from "views/examples/Execute.js";
 
@@ -63,8 +64,9 @@ const Admin = (props) => {
           {getRoutes(routes)}
           <Route path="/home" element={<Home />} />
           <Route path="/users/bind" element={<BindForm />} />
+          <Route path="/users/add" element={<AddUserForm />} />
           <Route path="/programs/upload" element={<Submit />} />
-          <Route path="/programs/execute" element={<Execute />} />
+          <Route path="/programs/:programId/execute" element={<Execute />} />
           <Route path="*" element={<Navigate to="/admin/home" replace />} />
         </Routes>
       </div>

@@ -22,11 +22,11 @@ const Program = () => {
     const [input, setInput] = useState("");
     const [selectedProgramId, setSelectedProgramId] = useState('');
 
-    const onExecuteCTAClick = (programId) => () => {
+    const onExecuteCTAClick = (programId, name) => () => {
         console.log("onExecuteCTAClick", programId)
         setSelectedProgramId(programId);
         localStorage.setItem("selectedProgramId", programId)
-        window.location.href = '/admin/programs/execute'
+        window.location.href = `/admin/programs/${name}/execute`
     }
 
     console.log("selectedProgramId", selectedProgramId)

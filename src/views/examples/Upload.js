@@ -85,13 +85,13 @@ const Upload = ({ onUploadSuccess }) => {
           <div className="space-y-4">
             <JsonPrettifier output={output} />
             <Button color="primary" onClick={resetForm}>
-              Onboard another workflow
+              Onboard another token driver
             </Button>
           </div>
         ) : (
           <Form onSubmit={handleSubmit}>
             <FormGroup>
-              <Label for="driverName">Token Handler Name</Label>
+              <Label for="driverName">Token Driver Name</Label>
               <Input
                 id="driverName"
                 value={driverName}
@@ -141,7 +141,7 @@ const Upload = ({ onUploadSuccess }) => {
             )}
 
             <FormGroup>
-              <Label for="driverVersion">Token Handler Version</Label>
+              <Label for="driverVersion">Token Driver Version</Label>
               <Input
                 id="driverVersion"
                 value={driverVersion}
@@ -152,12 +152,12 @@ const Upload = ({ onUploadSuccess }) => {
             </FormGroup>
 
             <FormGroup>
-              <Label for="driverBinary">Token Handler Binary</Label>
+              <Label for="driverBinary">Token Driver Binary</Label>
               <FileUpload fileName={driverBinary?.name} onUpload={(e) => setDriverBinary(e.target.files?.[0] || null)} fileType={driverType} />
             </FormGroup>
 
             <Button color="primary" type="submit" block>
-              Setup Token Handler
+              Setup Token Driver
             </Button>
           </Form>
         )}

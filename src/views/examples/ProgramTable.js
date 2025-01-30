@@ -94,7 +94,7 @@ const ProgramTable = ({ onRowSelect, selectedProgramId, onExecuteCTAClick }) => 
                                     </Badge>
                                 </td>
                                 <td>
-                                    <Button onClick={onExecuteCTAClick(driver.programId)}>
+                                    <Button onClick={onExecuteCTAClick(driver.programId, driver.name)}>
                                         Execute
                                     </Button>
                                 </td>

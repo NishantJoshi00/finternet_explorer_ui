@@ -30,8 +30,8 @@ var routes = [
     layout: "/admin"
   },
   {
-    path: "/supported-tokens",
-    name: "Supported tokens",
+    path: "/supported-token-drivers",
+    name: "Supported token drivers",
     icon: "fa-solid fa-coins",
     component: <SupportTokens />,
     layout: "/admin"

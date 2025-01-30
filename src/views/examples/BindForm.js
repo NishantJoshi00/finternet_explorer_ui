@@ -5,7 +5,6 @@ import {
     Card,
     CardBody,
     CardHeader,
-    CardTitle,
     Form,
     FormGroup,
     Label,
@@ -16,12 +15,10 @@ import {
     DropdownToggle,
     DropdownMenu,
     DropdownItem,
-    Textarea
 } from "reactstrap";
 import { getDriverList, bindUser } from '../../grpcClient'
-// import { JsonPrettifier } from "./JsonPrettify";
 
-const BindForm = ({ drivers }) => {
+const BindForm = () => {
     const [driverName, setDriverName] = useState("");
     const [driverVersion, setDriverVersion] = useState("");
     const [path, setPath] = useState("");
@@ -58,27 +55,18 @@ const BindForm = ({ drivers }) => {
 
     const fetchDrivers = async () => {
         try {
-          const driverList = await getDriverList()
-          const { driverDataList } = driverList
-          console.log(driverDataList)
-          // setTokenList([...driverDataList, {
-          //   name: "mono2",
-          //   version: "0.1.0"
-          // },{
-          //   name: "mono3",
-          //   version: "0.1.0"
-          // }
-          // ])
-          setDriverList(driverDataList.map(driver => driver.name))
+            const driverList = await getDriverList()
+            const { driverDataList } = driverList
+            console.log(driverDataList)
+            setDriverList(driverDataList.map(driver => driver.name))
         } catch (error) {
-          console.log(error)
+            console.log(error)
         }
-        
-      }
-    
-      useEffect(() => {
+    }
+
+    useEffect(() => {
         fetchDrivers()
-      }, [])
+    }, [])
 
     return (
         <Card className="shadow">
@@ -92,7 +80,6 @@ const BindForm = ({ drivers }) => {
                     </div>
                 ) : output ? (
                     <div>
-                        {/* <JsonPrettifier output={output} /> */}
                         <Button color="primary" onClick={resetForm} className="mt-3">
                             Add Asset Account
                         </Button>
