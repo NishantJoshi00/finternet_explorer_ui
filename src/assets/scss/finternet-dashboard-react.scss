@@ -51,3 +51,158 @@
 @import "finternet-dashboard/docs/footer";
 
 @import "react/react-differences";
+
+
+.main-content {
+    display: flex;
+    justify-content: center;
+}
+
+.shadow.card {
+    width: 45%;
+    margin-top: 100px;
+}
+
+.shadow.users {
+    width: 600px;
+}
+
+.navbar-vertical {
+    top: 52px !important;
+}
+
+.navbar-brand-img {
+    width: 40px;
+    margin-left: 20px;
+    margin-top: 3px;
+}
+
+.backButton {
+    position: absolute;
+    right: 22px;
+    top: 10px;
+}
+
+.sub-table-container {
+    background: #f1f2f7;
+    padding: 20px;
+}
+
+.sub-table {
+    background: #fff;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.support-tokens-container {
+    display: flex;
+    width: 80%;
+    transition: justify-content 1s;
+    justify-content: space-around;
+}
+
+
+.upload-container {
+    transition: all 1s;
+}
+
+.programs {
+    width: 50% !important;
+}
+
+.execute-container {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.execute-button {
+    position: absolute;
+    bottom: 1rem;
+    right: calc(50% + 8rem);
+    left: 1rem;
+    width: auto !important;
+}
+
+#executeName {
+    // height: 200px;
+}
+
+.execute-card {
+    padding: 1rem !important;
+    display: flex !important;
+    flex-direction: row !important;
+    width: 70% !important;
+    min-height: 200px !important;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.execute-form {
+    width: 50%;
+    border-right: 1px solid #cad1d7;
+    padding-right: 1rem;    
+    min-height: 200px !important;
+}
+
+.dropdown-item {
+    padding-left: 30px !important;
+}
+
+
+.driver-form {
+    width: 35% !important;
+    min-height: 500px;
+}
+
+.bindCTA {
+    position: absolute;
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+    width: auto !important;
+}
+
+.driver-form-body {
+    position: relative;
+}
+
+.breadcrumb-section {
+    position: absolute;
+    left: 0;
+}
+
+.breadcrumb-section .breadcrumb {
+    background: transparent;
+}
+
+.breadcrumb-item::first-letter {
+    text-transform: uppercase;
+}
+
+.navigateToBindCTA {
+    position: absolute;
+    width: 75px !important;
+    right: 1rem;
+    top: 0.5rem;
+}
+
+.driverSelectForm {
+    margin-left: 10px;
+}
+
+.driverSelectForm .dropdown-toggle{
+    background: #fff;
+    color: #000;
+    border: none;
+}
+
+.selected-program-row {
+    background:#f9f2f2;
+}
+
+.fileUploadLabel {
+    border-style: dashed !important;
+}

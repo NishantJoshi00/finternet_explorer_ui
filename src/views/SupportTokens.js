@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
 import { getDriverList } from "../grpcClient";
 import SupportTokenDetails from "./SupportTokenDetails";
+import Upload from "./examples/Upload";
 
 const SupportTokens = () => {
   const [tokenList, setTokenList] = useState([])
+  // const [showUpload, setShowUpload] = useState(false)
+
   const fetchDriverList = async () => {
     try {
       const driverList = await getDriverList()
-      const {driverDataList} = driverList
+      const { driverDataList } = driverList
       console.log(driverDataList)
       // setTokenList([...driverDataList, {
       //   name: "mono2",
@@ -23,15 +26,25 @@ const SupportTokens = () => {
     }
   }
 
+  // const updateShowUpload = (value) => () => {
+  //   if (showUpload !== value) {
+  //     setShowUpload(value)
+  //   }
+  // }
+
+  const onUploadSuccess = () => {
+    fetchDriverList()
+  }
+
   useEffect(() => {
     fetchDriverList()
   }, [])
 
   return (
-    <>
-      <h1 style={{ background: "white", textAlign: "center" }}>Supported Tokens</h1>
-     {Array.isArray(tokenList) && tokenList.length && <SupportTokenDetails data={tokenList}/>}
-    </>)
+    <div className='support-tokens-container'>
+      <SupportTokenDetails data={tokenList}  />
+      <Upload onUploadSuccess={onUploadSuccess}/>
+    </div>)
 };
 
 export default SupportTokens;

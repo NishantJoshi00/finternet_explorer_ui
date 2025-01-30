@@ -3,42 +3,43 @@ import {
   Card,
   CardHeader,
   CardBody,
-  ListGroup,
-  ListGroupItem,
+  Table,
   Badge
 } from 'reactstrap';
 
-const SupportTokenDetails = ({data}) => {
+const SupportTokenDetails = ({ data }) => {
 
   return (
-    <Card className="shadow-sm">
+    <Card className="shadow">
       <CardHeader>
         <h3 className="mb-0">Driver Details</h3>
+        {/* {!isUploadVisible && <button onClick={addClickHandler} style={{ position: 'absolute', right: '18px', top: '18px', border: 'none', borderRadius: '10px', background: '#5e72e4', color: '#fff', padding: '6px 12px' }}>Add</button>} */}
       </CardHeader>
       <CardBody>
-        <ListGroup flush>
-          {data.map((driver, index) => (
-            <ListGroupItem key={index} className="border-0">
-              <div className="d-flex align-items-center">
-                <i className="fas fa-circle text-primary mr-3" style={{ fontSize: '8px' }}></i>
-                <div>
-                  <div className="mb-1">
-                    <span className="mr-2">Driver Name:</span>
-                    <Badge color="info" className="px-3">
-                      {driver.name}
-                    </Badge>
-                  </div>
-                  <div>
-                    <span className="mr-2">Version:</span>
-                    <Badge color="success" className="px-3">
-                      v{driver.version}
-                    </Badge>
-                  </div>
-                </div>
-              </div>
-            </ListGroupItem>
-          ))}
-        </ListGroup>
+        <Table responsive hover className="align-items-center">
+          <thead>
+            <tr>
+              <th>Driver Name</th>
+              <th>Version</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((driver, index) => (
+              <tr key={index}>
+                <td>
+                  <Badge color="info" className="badge-lg">
+                    {driver.name}
+                  </Badge>
+                </td>
+                <td>
+                  <Badge color="success" className="badge-lg">
+                    {driver.version}
+                  </Badge>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
       </CardBody>
     </Card>
   );

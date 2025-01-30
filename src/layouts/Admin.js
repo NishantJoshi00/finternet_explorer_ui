@@ -18,8 +18,13 @@
 import React from "react";
 import { useLocation, Route, Routes, Navigate } from "react-router-dom";
 import Sidebar from "components/Sidebar/Sidebar.js";
+import Home from "views/examples/Home.js";
 
 import routes from "routes.js";
+import MyBreadcrumb from "views/examples/BreadCrumb";
+import BindForm from "views/examples/BindForm";
+import Submit from "views/examples/Submit";
+import Execute from "views/examples/Execute.js";
 
 const Admin = (props) => {
 
@@ -28,37 +33,39 @@ const Admin = (props) => {
       let mainRoute = prop.layout === "/admin" ? (
         <Route path={prop.path} element={prop.component} key={key} exact />
       ) : null;
-  
+
       let subRoutes = prop.subItems
         ? prop.subItems.map((subItem, subKey) => (
-            <Route
-              path={prop.path + subItem.path}
-              element={subItem.component || <div>{subItem.name}</div>}
-              key={`${key}-${subKey}`}
-              exact
-            />
-          ))
+          <Route
+            path={prop.path + subItem.path}
+            element={subItem.component || <div>{subItem.name}</div>}
+            key={`${key}-${subKey}`}
+            exact
+          />
+        ))
         : [];
-  
+
       return [mainRoute, ...subRoutes].filter(Boolean);
     });
   };
+
+  console.log("props", props);
 
   return (
     <>
       <Sidebar
         {...props}
         routes={routes}
-        logo={{
-          innerLink: "/admin/index",
-          imgSrc: "https://finternetlab.io/images/headers/finternet-favicon.png",
-          imgAlt: "...",
-        }}
       />
       <div className="main-content" >
+        <MyBreadcrumb />
         <Routes>
           {getRoutes(routes)}
-          <Route path="*" element={<Navigate to="/admin/index" replace />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/users/bind" element={<BindForm />} />
+          <Route path="/programs/upload" element={<Submit />} />
+          <Route path="/programs/execute" element={<Execute />} />
+          <Route path="*" element={<Navigate to="/admin/home" replace />} />
         </Routes>
       </div>
     </>

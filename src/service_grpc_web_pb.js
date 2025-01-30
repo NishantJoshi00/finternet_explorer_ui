@@ -545,6 +545,128 @@ proto.finternet.ExecutionPromiseClient.prototype.execute =
 
 
 /**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.finternet.SubmitProgramRequest,
+ *   !proto.finternet.SubmitProgramResponse>}
+ */
+const methodDescriptor_Execution_Submit = new grpc.web.MethodDescriptor(
+  '/finternet.Execution/Submit',
+  grpc.web.MethodType.UNARY,
+  proto.finternet.SubmitProgramRequest,
+  proto.finternet.SubmitProgramResponse,
+  /**
+   * @param {!proto.finternet.SubmitProgramRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.finternet.SubmitProgramResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.finternet.SubmitProgramRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.finternet.SubmitProgramResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.finternet.SubmitProgramResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.finternet.ExecutionClient.prototype.submit =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/finternet.Execution/Submit',
+      request,
+      metadata || {},
+      methodDescriptor_Execution_Submit,
+      callback);
+};
+
+
+/**
+ * @param {!proto.finternet.SubmitProgramRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.finternet.SubmitProgramResponse>}
+ *     Promise that resolves to the response
+ */
+proto.finternet.ExecutionPromiseClient.prototype.submit =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/finternet.Execution/Submit',
+      request,
+      metadata || {},
+      methodDescriptor_Execution_Submit);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.finternet.ListProgramRequest,
+ *   !proto.finternet.ListProgramResponse>}
+ */
+const methodDescriptor_Execution_List = new grpc.web.MethodDescriptor(
+  '/finternet.Execution/List',
+  grpc.web.MethodType.UNARY,
+  proto.finternet.ListProgramRequest,
+  proto.finternet.ListProgramResponse,
+  /**
+   * @param {!proto.finternet.ListProgramRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.finternet.ListProgramResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.finternet.ListProgramRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.finternet.ListProgramResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.finternet.ListProgramResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.finternet.ExecutionClient.prototype.list =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/finternet.Execution/List',
+      request,
+      metadata || {},
+      methodDescriptor_Execution_List,
+      callback);
+};
+
+
+/**
+ * @param {!proto.finternet.ListProgramRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.finternet.ListProgramResponse>}
+ *     Promise that resolves to the response
+ */
+proto.finternet.ExecutionPromiseClient.prototype.list =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/finternet.Execution/List',
+      request,
+      metadata || {},
+      methodDescriptor_Execution_List);
+};
+
+
+/**
  * @param {string} hostname
  * @param {?Object} credentials
  * @param {?grpc.web.ClientOptions} options

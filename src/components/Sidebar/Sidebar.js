@@ -111,16 +111,6 @@ const Sidebar = (props) => {
       id="sidenav-main"
     >
       <Container fluid>
-        {logo ? (
-          <NavbarBrand className="pt-0" {...navbarBrandProps}>
-            <img
-              alt={logo.imgAlt}
-              className="navbar-brand-img"
-              src="https://finternetlab.io/images/headers/finternet-favicon.png"
-            />
-          </NavbarBrand>
-        ) : null}
-        
         <div className="navbar-collapse">
           <div className="navbar-collapse-header d-md-none">
             <Row>

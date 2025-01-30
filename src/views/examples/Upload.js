@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { loadDriver } from '../../grpcClient';
+import FileUpload from './FileUpload';
 import {
   Card,
   CardHeader,
@@ -28,7 +29,7 @@ const JsonPrettifier = ({ output }) => {
   }
 };
 
-const Upload = () => {
+const Upload = ({ onUploadSuccess }) => {
   const [driverName, setDriverName] = useState('');
   const [driverVersion, setDriverVersion] = useState('');
   const [driverType, setDriverType] = useState('WASM');
@@ -43,8 +44,9 @@ const Upload = () => {
     setLoading(true);
 
     try {
-      const response = await loadDriver({ driverName, driverVersion, driverType, driverBinary });
+      const response = await loadDriver({ driverName, driverVersion, driverBinary });
       setOutput(response);
+      onUploadSuccess()
     } catch (error) {
       setOutput('An error occurred while loading the driver.');
       console.error(error);
@@ -65,9 +67,14 @@ const Upload = () => {
   console.log("storageType", storageType)
 
   return (
-    <Card className="shadow">
+    <Card className="shadow upload-container">
       <CardHeader>
-        <h3 className="mb-0">Upload</h3>
+        <h3 className="mb-0">
+          Upload
+          {/* <Button className='backButton' onClick={onClose}>
+            <i class="fa-solid fa-xmark"></i>
+          </Button> */}
+        </h3>
       </CardHeader>
       <CardBody>
         {loading ? (
@@ -94,7 +101,7 @@ const Upload = () => {
               />
             </FormGroup>
 
-            <FormGroup>
+            {/* <FormGroup>
               <Label htmlFor="handlerType">Token Handler Type</Label>
 
               <Input
@@ -110,8 +117,8 @@ const Upload = () => {
                 <option value="Native">Native</option>
                 <option value="Custodial">Custodial</option>
                 <option value="Proxy">Proxy</option>
-              </Input>
-            </FormGroup>
+              </Input> */}
+            {/* </FormGroup> */}
 
             {handlerType === "Native" && (
               <FormGroup>
@@ -145,28 +152,8 @@ const Upload = () => {
             </FormGroup>
 
             <FormGroup>
-              <Label for="driverType">Binary Type</Label>
-              <Input
-                type="select"
-                id="driverType"
-                value={driverType}
-                onChange={(e) => setDriverType(e.target.value)}
-                required
-              >
-                <option value="WAT">WAT</option>
-                <option value="WASM">WASM</option>
-              </Input>
-            </FormGroup>
-
-            <FormGroup>
               <Label for="driverBinary">Token Handler Binary</Label>
-              <Input
-                id="driverBinary"
-                type="file"
-                onChange={(e) => setDriverBinary(e.target.files?.[0] || null)}
-                required
-                accept={driverType === 'WAT' ? '.wat' : driverType === 'WASM' ? '.wasm' : ''}
-              />
+              <FileUpload fileName={driverBinary?.name} onUpload={(e) => setDriverBinary(e.target.files?.[0] || null)} fileType={driverType} />
             </FormGroup>
 
             <Button color="primary" type="submit" block>

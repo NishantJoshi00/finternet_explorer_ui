@@ -17,8 +17,9 @@
 */
 import SupportTokens from "views/SupportTokens.js";
 import Users from "views/examples/Users.js";
-import Upload from "views/examples/Upload.js";
+import Submit from "views/examples/Submit.js";
 import Execute from "views/examples/Execute.js";
+import Program from "views/examples/Programs";
 
 var routes = [
   {
@@ -29,8 +30,8 @@ var routes = [
     layout: "/admin"
   },
   {
-    path: "/support-tokens",
-    name: "Support tokens",
+    path: "/supported-tokens",
+    name: "Supported tokens",
     icon: "fa-solid fa-coins",
     component: <SupportTokens />,
     layout: "/admin"
@@ -40,20 +41,21 @@ var routes = [
     icon: "fa-solid fa-code",
     path: "/programs",
     layout: "/admin",
-    subItems: [
-      {
-        name: "Upload",
-        icon: "fa-solid fa-cloud-arrow-up",
-        component: <Upload />,
-        path: "/upload"
-      },
-      {
-        name: "Execute",
-        icon: "fa-solid fa-gear",
-        component: <Execute />,
-        path: "/groups"
-      }
-    ]
+    component: <Program />,
+    // subItems: [
+    //   {
+    //     name: "Upload",
+    //     icon: "fa-solid fa-cloud-arrow-up",
+    //     component: <Submit />,
+    //     path: "/upload"
+    //   },
+    //   {
+    //     name: "Execute",
+    //     icon: "fa-solid fa-gear",
+    //     component: <Execute />,
+    //     path: "/execute"
+    //   }
+    // ]
   }
 ];
 export default routes;

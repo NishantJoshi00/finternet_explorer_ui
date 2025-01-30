@@ -33,6 +33,7 @@
     "@grpc/grpc-js": "^1.12.5",
     "@grpc/proto-loader": "^0.7.13",
     "ajv": "^8.16.0",
+    "autoprefixer": "^10.4.20",
     "bootstrap": "4.6.2",
     "chart.js": "2.9.4",
     "class-variance-authority": "^0.7.1",
@@ -43,6 +44,7 @@
     "lucide-react": "^0.473.0",
     "moment": "2.29.4",
     "nouislider": "15.4.0",
+    "postcss": "^8.5.1",
     "react": "18.2.0",
     "react-chartjs-2": "2.11.2",
     "react-copy-to-clipboard": "5.1.0",
@@ -53,6 +55,7 @@
     "reactstrap": "8.10.0",
     "sass": "1.69.5",
     "tailwind-merge": "^2.6.0",
+    "tailwindcss": "^4.0.0",
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {

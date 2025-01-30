@@ -1,4 +1,4 @@
-import { useState } from "react"; 
+import { useEffect, useState } from "react";
 import { executeCommand } from '../../grpcClient';
 import {
   Card,
@@ -10,17 +10,18 @@ import {
   Input,
   Button,
   Spinner,
-  FormText
+  FormText,
 } from "reactstrap";
+import ActivityLog from "./ActivityLog";
 // import { execute } from "@/lib/backend";
 
 // JSON Prettifier component converted to work with Reactstrap
 const JsonPrettifier = ({ output }) => {
   try {
-    const prettyJson = typeof output === 'string' ? 
-      JSON.stringify(JSON.parse(output), null, 2) : 
+    const prettyJson = typeof output === 'string' ?
+      JSON.stringify(JSON.parse(output), null, 2) :
       JSON.stringify(output, null, 2);
-    
+
     return (
       <pre className="bg-light p-3 rounded">
         <code>{prettyJson}</code>
@@ -32,115 +33,80 @@ const JsonPrettifier = ({ output }) => {
 };
 
 const Execute = () => {
-  const [name, setName] = useState("");
   const [input, setInput] = useState("");
-  const [type, setType] = useState("WASM");
-  const [binary, setBinary] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [output, setOutput] = useState(null);
+  const [output, setOutput] = useState([])
+
+  const getOutput = (getByProgramId) => {
+    const output = localStorage.getItem("output")
+    let outputObj = {}
+  
+    if(output) {
+      outputObj = JSON.parse(output)
+    }
+
+    if(getByProgramId) {
+      const selectedProgramId = localStorage.getItem("selectedProgramId")
+      return outputObj[selectedProgramId] || []
+    }
+  
+    return outputObj
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
+    const selectedProgramId = localStorage.getItem("selectedProgramId")
+    const output = localStorage.getItem("output")
+    let outputObj = getOutput()
 
     try {
-      const response = await executeCommand({name, input, type, binary});
-      setOutput(response);
+      const response = await executeCommand({ input, programId: selectedProgramId });
+      if(!outputObj[selectedProgramId]) {
+        outputObj[selectedProgramId] = []
+      }
+      outputObj[selectedProgramId].push(response)
+      setOutput(outputObj[selectedProgramId])
+      localStorage.setItem('output', JSON.stringify(outputObj))
     } catch (error) {
-      setOutput("An error occurred during execution.");
+      // setOutput("An error occurred during execution.");
       console.error(error);
-    } finally {
-      setLoading(false);
     }
   };
+  
+  useEffect(() => {
+    const output = getOutput(true)
+    setOutput(output)
+  }, [])
 
-  const resetForm = () => {
-    setOutput(null);
-    setName("");
-    setInput("");
-    setType("WAT");
-    setBinary(null);
-  };
-
+  console.log("output", output)
   return (
-    <Card className="shadow">
-      <CardHeader>
-        <h3 className="mb-0">Execute Program (app triggered)</h3>
-      </CardHeader>
-      <CardBody>
-        {loading ? (
-          <div className="d-flex justify-content-center align-items-center" style={{ height: "16rem" }}>
-            <Spinner color="primary" style={{ width: '3rem', height: '3rem' }} />
-          </div>
-        ) : output ? (
-          <div className="d-flex flex-column gap-3">
-            <JsonPrettifier output={output} />
-            <Button color="primary" onClick={resetForm}>
-              Execute Another
-            </Button>
-          </div>
-        ) : (
-          <Form onSubmit={handleSubmit}>
-            <FormGroup className="mb-3">
-              <Label for="name">Program Name</Label>
-              <Input
-                id="name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                required
-                placeholder="Enter program name"
-              />
-            </FormGroup>
+      <Card className="shadow execute-card">
+        <Form className="execute-form" onSubmit={handleSubmit}>
+          <FormGroup>
+            <h3>Input</h3>
+            <Input
+              id="executeName"
+              type="textarea"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              required
+              style={{ marginTop: '12%'}}
+              placeholder="Enter input"
+            />
+          </FormGroup>
 
-            <FormGroup className="mb-3">
-              <Label for="input">Input</Label>
-              <Input
-                id="input"
-                type="textarea"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                style={{ fontFamily: "monospace" }}
-                required
-                rows="4"
-              />
-              <FormText color="muted">
-                The input is passed to the WebAssembly module as a JSON.
-              </FormText>
-            </FormGroup>
-
-            <FormGroup className="mb-3">
-              <Label for="type">Type</Label>
-              <Input
-                type="select"
-                id="type"
-                value={type}
-                onChange={(e) => setType(e.target.value)}
-                required
-              >
-                <option value="WAT">WAT</option>
-                <option value="WASM">WASM</option>
-              </Input>
-            </FormGroup>
-
-            <FormGroup className="mb-4">
-              <Label for="binary">Binary</Label>
-              <Input
-                id="binary"
-                type="file"
-                onChange={(e) => setBinary(e.target.files?.[0] || null)}
-                required
-                accept={type === "WAT" ? ".wat" : type === "WASM" ? ".wasm" : ""}
-                className="form-control-file"
-              />
-            </FormGroup>
-
-            <Button color="primary" type="submit" block>
-              Execute
-            </Button>
-          </Form>
-        )}
-      </CardBody>
-    </Card>
+          <Button className="execute-button" color="primary" type="submit" block>
+            Execute
+          </Button>
+        </Form>
+        <div>
+          <h3 style={{marginLeft: '10px'}}> Activity Log</h3>
+          {output && output.map(res => {
+            return (
+              <div style={{ background: "#f9f2f2", marginBottom: "10px", marginLeft: "8px"}}>{res}</div>
+            )
+          })}
+        </div>
+      </Card>
   );
 };
 
